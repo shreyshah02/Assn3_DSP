@@ -13,12 +13,22 @@ class SubDirect:
         self.socket_rcv = None
         self.topics_list = set()
 
-    def register(self, topic):
-        self.topics_list.add(topic)
+    def register(self, topics):
         self.context_sub = zmq.Context()
         self.socket_sub = self.context_sub.socket(zmq.REQ)
         self.socket_sub.connect(self.ip_b)
-        self.socket_sub.send_json(json.dumps({"type": "add_subscriber", "ip": self.ip, "topic": topic}))
+        
+        for t in topics:
+            self.socket_sub.send_json(
+            json.dumps(
+                {"type": "add_subscriber", 
+                 "ip": self.ip, 
+                 "topic": t['topic'], 
+                 "strength": t['strength'], 
+                 "history": t['history']}
+                )
+            )
+        
         ip = self.socket_sub.recv_json()['msg']
         self.context_rcv = zmq.Context()
         self.socket_rcv = self.context_rcv.socket(zmq.SUB)
@@ -55,19 +65,23 @@ class SubBroker:
         self.socket_sub = None
         self.socket_ntf = None
 
-    def register(self, topic):
+    def register(self, topics):
         self.context_sub = zmq.Context()
         self.socket_sub = self.context_sub.socket(zmq.REQ)
         self.socket_sub.connect(self.ip_b)
 
-        if isinstance(topic, list):
-            for t in topic:
-                self.socket_sub.send_json({"type": "add_subscriber", "ip": self.ip, "topic": t})
-                res = self.socket_sub.recv_json()
-        else:
-            self.socket_sub.send_json({"type": "add_subscriber", "ip": self.ip, "topic": topic})
+        for t in topics:
+            self.socket_sub.send_json(
+            json.dumps(
+                {"type": "add_subscriber", 
+                 "ip": self.ip, 
+                 "topic": t['topic'], 
+                 "strength": t['strength'], 
+                 "history": t['history']}
+                )
+            )
             res = self.socket_sub.recv_json()
-
+        
         self.context_ntf = zmq.Context()
         self.socket_ntf = self.context_ntf.socket(zmq.REP)
         self.socket_ntf.bind("tcp://*:%s" % self.ip.split(":")[2])
