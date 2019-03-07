@@ -1,7 +1,7 @@
 from middleware.broker import BrokerType1, BrokerType2
 from logger import get_logger
 from kazoo.client import KazooClient
-from kazoo.exceptions import NodeExistsError
+from kazoo.exceptions import NodeExistsError, NoNodeError
 from middleware.broker import RegisterTable
 from kazoo.recipe.watchers import ChildrenWatch, DataWatch
 
@@ -40,18 +40,27 @@ class Broker:
 
     def _sync_map_table(self):
         table = RegisterTable()
-        pubs = self.zk.get_children('%s/Publisher'%self.zk_root)
-        subs = self.zk.get_children('%s/Subscriber'%self.zk_root)
-        for item in pubs:
-            data, _ = self.zk.get('%s/Publisher/%s'%(self.zk_root, item))
-            data = data.decode()
-            ip, topics = data.split(',')
-            table.add_pub(ip, topics)
-        for item in subs:
-            data, _ = self.zk.get('%s/Subscriber/%s'%(self.zk_root, item))
-            data = data.decode()
-            ip, topics = data.split(',')
-            table.add_sub(ip, topics)
+        topics = self.zk.get_children('/Topic')
+        for t in topics:
+            try:
+                pubs = self.zk.get_children('/Topic/%s/Pub'%t)
+            except NoNodeError:
+                pubs = []
+            try:
+                subs = self.zk.get_children('/Topic/%s/Sub'%t)
+            except NoNodeError:
+                subs = []
+            for pub in pubs:
+                data = self.zk.get('Topic/%s/Pub/%s'%(t, pub))[0].decode()
+                ip, strength, history = data.split(',')
+                table.add_pub(ip, [{'topic': t, 'strength': strength, 'history': history}])
+            for sub in subs:
+                data = self.zk.get('Topic/%s/Sub/%s'%(t, sub))[0].decode()
+                ip, history = data.split(',')
+                table.add_pub(ip, [{'topic': t, 'history': history}])
+            pub_leader = self.zk.get('Topic/%s/Pub'%t)[0].decode()
+            m_ip, m_history = pub_leader.split(',')
+            table.set_strengthest_pub(t, pub=m_ip)
         self.broker.table = table
 
     def _become_leader(self):
@@ -81,9 +90,9 @@ class Broker:
         self._create_znode()
         self.flag = True
         if int(self.config['mode']) == 1:
-            broker = BrokerType1(self.config)
+            broker = BrokerType1(self.config, self.zk)
         else:
-            broker = BrokerType2(self.config)
+            broker = BrokerType2(self.config, self.zk)
         self.broker = broker
         self._register_to_zk()
         pub_wather = ChildrenWatch(self.zk, '%s/Publisher'%self.zk_root, self._on_pub_change)

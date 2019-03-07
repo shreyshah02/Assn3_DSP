@@ -15,11 +15,18 @@ config = ConfigObj(config_path)
 if item == '':
     item = list(config.keys())[0]
 
+topics = []
+topics_info = config['topic'] if isinstance([config['topic']], list) else [config['topic']]
+for item in topics_info:
+    t, h = item.split('|')
+    topics.append({'topic':t, 'history': h})
+
 config = config[item]
 
 p = Subscriber(ip_self=config['sub_addr'], ip_zookeeper=config['zookeeper'],
                comm_type=int(config['mode']), logfile=config['logfile'], name=item)
-p.register(config['topic'])
+
+p.register(topics)
 
 while 1:
     p.receive()

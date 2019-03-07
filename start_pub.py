@@ -20,7 +20,13 @@ config = config[item]
 p = Publisher(mode=int(config['mode']), ip_address=config['pub_addr'],
               zk_address=config['zookeeper'], strength=config['strength'], logfile=config['logfile'],pub_name=item)
 
-p.register(config['topic'])
+topics = []
+topics_info = config['topic'] if isinstance([config['topic']], list) else [config['topic']]
+for item in topics_info:
+    t, h = item.split('|')
+    topics.append({'topic':t, 'history': h})
+
+p.register(topics)
 
 while 1:
     x = input('>')
