@@ -1,0 +1,15 @@
+2019-03-06,16:10:12.809573 i am the current leader. Table={}
+2019-03-06,16:10:12.809573 Publisher changes. Table={}
+2019-03-06,16:10:12.809573 Subscriber changes. Table={}
+2019-03-06,16:10:12.809573 broker started. mode=2, port=5555, znode=/test_temp_dir/Election/Broker_0000000000
+2019-03-06,16:10:13.791354 
+2019-03-06,16:10:13.806957 
+2019-03-06,16:10:13.806957 
+2019-03-06,16:10:13.806957 
+2019-03-06,16:10:13.822581 I am not the current leader. Waiting for Broker_0000000000 to die
+2019-03-06,16:10:13.838207 Publisher changes. Table={}
+2019-03-06,16:10:13.838207 Subscriber changes. Table={}
+2019-03-06,16:10:13.838207 broker started. mode=2, port=5556, znode=/test_temp_dir/Election/Broker_0000000001
+2019-03-06,16:10:15.439233 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:5005', 'topic': 'hello'}, response=
+2019-03-06,16:10:15.496262 Subscriber changes. Table={'hello': {'pub': set(), 'sub': {'tcp://127.0.0.1:5005'}}}
+2019-03-06,16:10:15.500260 Subscriber changes. Table={'hello': {'pub': set(), 'sub': {'tcp://127.0.0.1:5005'}}}
