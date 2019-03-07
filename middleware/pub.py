@@ -34,15 +34,18 @@ class PublisherDirectly:
         context = zmq.Context()
         self.socket_broker = context.socket(zmq.REQ)
         self.socket_broker.connect(self.broker_address)
-        if isinstance(topic, list):
-            for t in topic:
-                self.socket_broker.send_json(
-                    (json.dumps({'type': 'add_publisher', 'ip': self.ip_address, 'topic': t})))
-                msg = self.socket_broker.recv_json()
-        else:
-            self.socket_broker.send_json((json.dumps({'type': 'add_publisher',
-                                                      'ip': self.ip_address, 'topic': topic})))
-            msg = self.socket_broker.recv_json()
+        self.socket_broker.send_json(
+                        (json.dumps({'type': 'add_publisher', 'ip': self.ip_address, 'topic': topic})))
+        #if isinstance(topic, list):
+        #    for t in topic:
+        #        self.socket_broker.send_json(
+        #            (json.dumps({'type': 'add_publisher', 'ip': self.ip_address, 'topic': t})))
+        #        msg = self.socket_broker.recv_json()
+        #else:
+        #    self.socket_broker.send_json((json.dumps({'type': 'add_publisher',
+         #                                             'ip': self.ip_address, 'topic': topic})))
+            #msg = self.socket_broker.recv_json()
+        msg = self.socket_broker.recv_json()
         context2 = zmq.Context()
 
     '''
@@ -105,6 +108,9 @@ class PublisherViaBroker:
         context = zmq.Context()
         self.socket_broker = context.socket(zmq.REQ)
         self.socket_broker.connect(self.broker_address)
+        self.socket_broker.send_json(
+            (json.dumps({'type': 'add_publisher', 'ip': self.ip_address, 'topic': topic})))
+        '''
         if isinstance(topic, list):
             for t in topic:
                 self.socket_broker.send_json(
@@ -114,6 +120,8 @@ class PublisherViaBroker:
             self.socket_broker.send_json((json.dumps({'type': 'add_publisher',
                                                       'ip': self.ip_address, 'topic': topic})))
             msg = self.socket_broker.recv_json()
+        '''
+        msg = self.socket_broker.recv_json()
         context2 = zmq.Context()
 
     '''
