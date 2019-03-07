@@ -40,13 +40,14 @@ class Subscriber:
     def __get_broker_ip(self):
         self.ip_b = self.zk_client.get("%s/Leader"%self.zk_root)
 
-    def register(self, topic):
+    def register(self, topics):
         self.create_mw()
-        self.sub_mid.register(topic)
-        self.zk_client.create('%s/Subscriber/%s'%(self.zk_root, self.name), ('%s,%s'%(self.ip, topic)).encode(),
+        self.sub_mid.register(topics)
+        for t in topics:
+            self.zk_client.create('%s/Subscriber/%s'%(self.zk_root, self.name), ('%s,%s'%(self.ip, t['topic'])).encode(),
                               ephemeral=True, makepath=True)
+            self.logger.info('sub register to broker on %s. ip=%s, topic=%s' % (self.ip_b, self.ip, t['topic']))
         DataWatch(self.zk_client, "%s/Leader"%self.zk_root, self.update)
-        self.logger.info('sub register to broker on %s. ip=%s, topic=%s' % (self.ip_b, self.ip, topic))
         return 0
 
     def receive(self):
