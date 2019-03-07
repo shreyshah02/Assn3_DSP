@@ -1,12 +1,10 @@
-2019-03-06,16:19:03.763187 i am the current leader. Table={}
-2019-03-06,16:19:03.763187 Publisher changes. Table={}
-2019-03-06,16:19:03.778810 Subscriber changes. Table={}
-2019-03-06,16:19:03.778810 broker started. mode=2, port=5555, znode=/Election/Broker_0000000000
-2019-03-06,16:28:38.922061 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': 'hello'}, response=
-2019-03-06,16:28:38.922061 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set()}}
-2019-03-06,16:30:42.317142 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5006', 'topic': 'hello'}, response=
-2019-03-06,16:30:42.332765 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005', 'tcp://127.0.0.1:5006'}, 'sub': set()}}
-2019-03-06,16:31:06.031066 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006'}, 'sub': set()}}
-2019-03-06,16:34:09.683717 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5008', 'topic': 'hello'}, response=
-2019-03-06,16:34:09.699342 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006', 'tcp://127.0.0.1:5008'}, 'sub': set()}}
-2019-03-06,16:34:30.030801 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5008'}, 'sub': set()}}
+2019-03-07,16:15:40.983519 
+2019-03-07,16:15:40.987508 
+2019-03-07,16:15:40.990500 
+2019-03-07,16:15:40.994488 
+2019-03-07,16:15:41.022434 i am the current leader. Table={}
+2019-03-07,16:15:41.030396 Publisher changes. Table={}
+2019-03-07,16:15:41.042361 Subscriber changes. Table={}
+2019-03-07,16:15:41.042361 broker started. mode=2, port=5555, znode=/Election/Broker_0000000068
+2019-03-07,16:15:48.820282 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:15:48.828261 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '1', 'strength': '003'}, {'topic': 'hello1', 'history': '1', 'strength': '002'}]}, response=

@@ -21,7 +21,8 @@ class RegisterTable:
         return str(self.topics)
 
     def set_strengthest_pub(self, topic, pub):
-        self.topics['strongest'][topic] = pub
+        if topic in self.topics:
+            self.topics[topic]['strongest'] = pub
 
     def add_pub(self, pub, topics):
         now = datetime.now().strftime(tf)
@@ -88,6 +89,7 @@ class BrokerBase:
         result = self.table.add_pub(pub=req['ip'], topics=req['topic'])
         topics = req['topic'] if isinstance(req['topic'], list) else [req['topic']]
         for t in topics:
+            t = t['topic']
             if not self.zk.exists('/Topic/%s/Pub'%t):
                 self.zk.create('/Topic/%s/Pub' % t, makepath=True)
             if t not in self.watched_topics:

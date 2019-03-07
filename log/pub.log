@@ -1,1 +1,2 @@
-2019-03-06,16:34:09.683717 pub register to bloker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5008, topic=hello
+2019-03-07,16:15:48.760444 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5005, topic={'topic': 'hello', 'history': '1', 'strength': '003'}
+2019-03-07,16:15:48.775403 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5005, topic={'topic': 'hello1', 'history': '1', 'strength': '002'}
