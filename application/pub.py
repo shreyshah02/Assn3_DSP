@@ -5,6 +5,7 @@ from kazoo.recipe.watchers import DataWatch
 from kazoo.recipe.watchers import ChildrenWatch
 from kazoo.exceptions import NoNodeError
 from functools import partial
+import copy
 
 class Publisher:
     def __init__(self, mode, ip_address=None, zk_address=None, strength=0,
@@ -40,47 +41,51 @@ class Publisher:
         return 0
 
     def watch_strength(self, topic, children):
-        c = self.my_client.get_children('/Topic/%s'%topic)
+        c = self.my_client.get_children('/Topic/Pub/%s'%topic)
         self.compare_strength(topic, c)
 
     def compare_strength(self, topic, c):
         min_s = 1000
         for x in c:
-            strength = int(self.my_client.get("/Topic/%s/%s"%(topic, x))[0].decode().split(',')[0])
+            strength = int(self.my_client.get("/Topic/Pub/%s/%s"%(topic, x))[0].decode().split(',')[0])
             #print(type(strength))
             if strength < min_s:
                 min_s = strength
         if int(self.topic_strength[topic]) <= min_s:
-            self.my_client.set("/Topic/%s"%topic, self.ip_address.encode())
+            self.my_client.set("/Topic/Pub/%s"%topic, self.ip_address.encode())
         return 0
 
-    def register(self, topic):
+    def register(self, topics):
         self.create_mw()
         self.broker_address = self.my_client.get("%s/Leader"%self.zk_root)[0].decode()
-        c = []
-        try:
-            c = self.my_client.get_children("/Topic/%s"%topic)
-            #print ("hello")
-        except NoNodeError:
-            self.my_client.create("/Topic/%s"%topic, makepath=True, ephemeral=False)
-            c = []
-        id = self.my_client.create("/Topic/%s/Pub"%topic, sequence=True, makepath=True, ephemeral=True)
-        #print (id)
-        strength = id[-3:]
-        #print (strength)
-        history = "1"
-        s_h = strength + "," + history
-        self.topic_strength[topic] = strength
-        self.my_client.set(id, s_h.encode())
-        self.compare_strength(topic, c)
-        cw = ChildrenWatch(self.my_client, '/Topic/%s' % topic, partial(self.watch_strength, topic))
+        topics_strength = []
+        for topic in topics:
+            try:
+                c = self.my_client.get_children("/Topic/Pub/%s"%topic)
+            except NoNodeError:
+                self.my_client.create("/Topic/Pub/%s"%topic, makepath=True, ephemeral=False)
+                c = []
+            id = self.my_client.create("/Topic/Pub/%s/Pub"%topic, sequence=True, makepath=True, ephemeral=True)
+            #print (id)
+            strength = id[-3:]
+            #print (strength)
+            history = topic["history"]
+            s_h = strength + "," + history
+            self.topic_strength[topic] = strength
+            self.my_client.set(id, s_h.encode())
+            self.compare_strength(topic, c)
+            topic_s = copy.deepcopy(topic)
+            topic_s["strength"] = strength
+            topics_strength.append(topic_s)
+            cw = ChildrenWatch(self.my_client, '/Topic/Pub/%s' % topic, partial(self.watch_strength, topic))
+            self.logger.info('pub register to broker on %s. ip=%s, topic=%s' % (self.broker_address, self.ip_address, topic_s))
+            node_url = "%s/Publisher/" % self.zk_root + self.pub_name
+            node_data = self.ip_address + "," + strength + "," + history
+            self.my_client.create(node_url, node_data.encode(), ephemeral=True, makepath=True)
 
 
-        self.pub_mw.register(topic)
-        self.logger.info('pub register to bloker on %s. ip=%s, topic=%s'%(self.broker_address, self.ip_address, topic))
-        node_url = "%s/Publisher/"%self.zk_root + self.pub_name
-        node_data = self.ip_address + "," + topic
-        self.my_client.create(node_url, node_data.encode(), ephemeral=True, makepath=True)
+        self.pub_mw.register(topics_strength)
+
         leader_watcher = DataWatch(self.my_client, '%s/Leader'%self.zk_root, self.update_broker_ip_socket)
 
 
