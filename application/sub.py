@@ -22,12 +22,12 @@ class Subscriber:
         self.zk_client.start()
         self.sub_mid = None
 
-    def create_mw(self):
+    def create_middleware(self):
         ip_b, _ = self.zk_client.get("%s/Leader" % self.zk_root)
         ip_b = ip_b.decode()
         self.ip_b = ip_b
         if self.comm_type == sub_direct:
-            self.sub_mid = SubDirect(self.ip, self.ip_b)
+            self.sub_mid = SubDirect(self.ip, self.ip_b, self.zk_client)
         elif self.comm_type == sub_broker:
             self.sub_mid = SubBroker(self.ip, self.ip_b)
         else:
@@ -58,7 +58,8 @@ class Subscriber:
             self.zk_client.set(id, s_h.encode())
 
             self.logger.info('sub register to broker on %s. ip=%s, topic=%s' % (self.ip_b, self.ip, t['topic']))
-        self.create_mw()
+
+        self.create_middleware()
         self.sub_mid.register(topics)
         DataWatch(self.zk_client, "%s/Leader"%self.zk_root, self.update)
         return 0
