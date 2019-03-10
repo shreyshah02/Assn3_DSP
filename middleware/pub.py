@@ -16,8 +16,9 @@ class PublisherDirectly:
             self.__socket_bind()
             # print ("haven't registered a publisher")
         else:
-            # self.__socket_bind()
-            self.socket.send_json({"topic": topic, "value": value})
+            #self.socket.send_json({"topic": topic, "value": value})
+            self.socket.send_json({"type": "publish_req", "topic": topic,
+                                                       "value": value, 'ip': self.ip_address})
         return 0
 
     def register(self, topic):
