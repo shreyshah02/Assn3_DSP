@@ -3,7 +3,7 @@ from configobj import ConfigObj
 import sys
 
 
-config_path, item = None, 'Pub3'
+config_path, item = None, 'Pub1'
 if len(sys.argv) == 1:
     config_path = 'config/publisher.ini'
 if len(sys.argv) >= 2:

@@ -1,4 +1,2 @@
-2019-03-07,16:55:43.908279 sub register to broker on None. ip=tcp://127.0.0.1:5011, topic=hello
-2019-03-07,16:58:13.227365 receive a msg={'topic': 'hello', 'value': '456'}
-2019-03-07,16:55:52.864394 receive a msg={'topic': 'hello', 'value': '123'}
-2019-03-07,16:58:13.208415 receive a msg={'topic': 'hello', 'value': '456'}
+2019-03-10,17:00:55.254498 sub register to broker on None. ip=tcp://127.0.0.1:5010, topic=hello
+2019-03-10,17:01:13.411930 receive a msg={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}

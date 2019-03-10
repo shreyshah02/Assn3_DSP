@@ -111,11 +111,13 @@ class BrokerType1(BrokerBase):
 
     def _add_sub(self, req):
         super()._add_sub(req)
-        for ip in self.table.topics[req['topic']]['pub']:
-            sub_hisory = self.table.subs[req['ip']]['topics'][req['topic']]['history']
-            pub_hisory = self.table.pubs[ip]['topics'][req['topic']]['history']
+        topic = req['topic'][0]['topic']
+        strongest = self.table.topics[topic]['strongest']
+        sub_hisory = self.table.subs[req['ip']]['topics'][topic]['history']
+        if strongest in self.table.pubs:
+            pub_hisory = self.table.pubs[strongest]['topics'][topic]['history']
             if pub_hisory >= sub_hisory:
-                return ip
+                return strongest
         return ''
 
 class BrokerType2(BrokerBase):

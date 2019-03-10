@@ -3,7 +3,7 @@ from configobj import ConfigObj
 import sys
 import time
 
-config_path, item = None, 'Sub2'
+config_path, item = None, 'Sub1'
 if len(sys.argv) == 1:
     config_path = 'config/subscriber.ini'
 if len(sys.argv) >= 2:

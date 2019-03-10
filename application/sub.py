@@ -2,7 +2,7 @@ from kazoo.client import KazooClient
 from kazoo.recipe.watchers import DataWatch
 from middleware.sub import *
 from logger import get_logger
-from kazoo.exceptions import NoNodeError
+from kazoo.exceptions import NoNodeError, NodeExistsError
 
 sub_direct = 1
 sub_broker = 2
@@ -43,9 +43,12 @@ class Subscriber:
 
     def register(self, topics):
 
-        self.zk_client.create('%s/Subscriber/%s' % (self.zk_root, self.name),
-                              ('%s,%s' % (self.ip, '')).encode(),
-                              ephemeral=True, makepath=True)
+        try:
+            self.zk_client.create('%s/Subscriber/%s' % (self.zk_root, self.name),
+                                  ('%s,%s' % (self.ip, '')).encode(),
+                                  ephemeral=True, makepath=True)
+        except NodeExistsError:
+            pass
         for t in topics:
             try:
                 c = self.zk_client.get_children("/Topic/%s/Sub"%t['topic'])
@@ -67,6 +70,7 @@ class Subscriber:
     def receive(self):
         msg = ''
         if self.comm_type == sub_direct:
+            self.sub_mid.start_receive_threads()
             msg = self.sub_mid.receive()
         if self.comm_type == sub_broker:
             msg = self.sub_mid.notify()
