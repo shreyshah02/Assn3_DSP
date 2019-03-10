@@ -1,17 +1,20 @@
-# Assn2_DSP
+# Assn3_DSP
 ## Team member(T4)
 Wei Fan(wei.fan@vanderbilt.edu Github id: FWWorks)  
 Dingjie Su(dingjie.su@Vanderbilt.Edu Github id: sudmat)  
 Zhehao Zeng(zhehao.zeng@vanderbilt.edu Github id: frankvandy2018) 
 
 ## Project code
-https://github.com/FWWorks/Assn2_DSP
+https://github.com/FWWorks/Assn3_DSP
 
 ## Abstract
-We built a layer upon the PUB/SUB model supported by ZMQ and ZooKeeper to support anonymity between publishers and subscribers. 
-Based on what we did in assignment1, we use kazoo to support multiple brokers. Instead of publisher going for a broker, we now make a  publisher/subscriber goes to a zookeeper server to get the leader broker's address, then the data dissemination from publishers and subscribers is the same as assignment 1. eper. Join and Leave of entities is now handled via ZooKeeper via Watch mechanisms and the brokers do “leader election” using ZooKeeper. If Broker leadership changes, these entities will need to know the change. 
+We built a layer upon the PUB/SUB model supported by ZMQ and ZooKeeper to support anonymity between publishers and subscribers, and used kazoo to support multiple brokers. We reused most of codes from Assn2, and made progress in adding ownership strength and history to support QoS properties. 
+We use ZooKeeper as a way to assign ownership strength, which is used to 'elect' publishers publishing the same topic. Using ZooKeeper, we create new nodes for publishers who publish same topics under the directory '/Topic' and assign monotonically increasing numbers for ownership strength where number 1 is highest strength and so on. The ownership strength is tied to topic so it is possbile for a publisher shows up under 2 different topics when it have registered the two topics. 
+We applied this progress to both two approaches. In approach one, which subscribers get publisher's address and go for publisher directly (however we found the instructor call this approach two... whatever...), we made the subscriber only connect to the publisher with the highest strength. Im approach two, where all message dismination conveyed via broker, we make the broker block traffic from lower-ranked publishers. Our implement also supports the situation that the changes of publisher when the highest-ranked publisher dies.
+We also applied History QoS for 'offered vs requested' model. We now require a parameter N, which represents samples of information published on a topic be preserved. The rule is, if a publisher maintains last 10 samples while a subscriber wants last 20 samples, then this subscriber cannot get the data even if the topic of interest is common. 
 We also did experiments to get a sense of the impact on amount of data sent, latency of dissemination, pinpointing the source of bottlenecks.
 The code is written in Python3.5 and we use Mininet to build single topologies to test our code, which runs on Linux Ubuntu.
+In addition, we set up experiments on Chameleon cloud. 
 
 ## How to run our code
 
