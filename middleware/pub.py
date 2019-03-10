@@ -90,7 +90,8 @@ class PublisherViaBroker:
         else:
             # self.__socket_bind()
             # self.socket.send_string(json.dumps({"type": "publish_req", "topic": topic, "value": value}))
-            self.socket_broker.send_string(json.dumps({"type": "publish_req", "topic": topic, "value": value}))
+            self.socket_broker.send_string(json.dumps({"type": "publish_req", "topic": topic,
+                                                       "value": value, 'ip': self.ip_address}))
             msg = self.socket_broker.recv_json()
         return 0
 

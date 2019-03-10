@@ -3,7 +3,7 @@ from logger import get_logger
 from kazoo import client as kz_client
 from kazoo.recipe.watchers import DataWatch
 from kazoo.recipe.watchers import ChildrenWatch
-from kazoo.exceptions import NoNodeError
+from kazoo.exceptions import NoNodeError, NodeExistsError
 from functools import partial
 import copy
 
@@ -81,7 +81,10 @@ class Publisher:
             self.logger.info('pub register to broker on %s. ip=%s, topic=%s' % (self.broker_address, self.ip_address, topic_s))
         node_url = "%s/Publisher/" % self.zk_root + self.pub_name
         node_data = self.ip_address
-        self.my_client.create(node_url, node_data.encode(), ephemeral=True, makepath=True)
+        try:
+            self.my_client.create(node_url, node_data.encode(), ephemeral=True, makepath=True)
+        except NodeExistsError:
+            pass
 
 
         self.pub_mw.register(topics_strength)

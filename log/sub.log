@@ -1,3 +1,4 @@
-2019-02-16 16:31:56 INFO sub register to broker on tcp://127.0.0.1:5556. ip=tcp://127.0.0.1:5010, topic=hello
-2019-02-16 16:32:01 INFO receive a msg={'topic': 'hello', 'value': 'qwe'}
-2019-02-16 16:34:05 INFO receive a msg={'topic': 'hello', 'value': 'xyz'}
+2019-03-07,16:55:43.908279 sub register to broker on None. ip=tcp://127.0.0.1:5011, topic=hello
+2019-03-07,16:58:13.227365 receive a msg={'topic': 'hello', 'value': '456'}
+2019-03-07,16:55:52.864394 receive a msg={'topic': 'hello', 'value': '123'}
+2019-03-07,16:58:13.208415 receive a msg={'topic': 'hello', 'value': '456'}

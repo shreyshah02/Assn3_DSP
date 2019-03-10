@@ -2,6 +2,7 @@ from kazoo.client import KazooClient
 from kazoo.recipe.watchers import DataWatch
 from middleware.sub import *
 from logger import get_logger
+from kazoo.exceptions import NoNodeError
 
 sub_direct = 1
 sub_broker = 2
@@ -41,12 +42,24 @@ class Subscriber:
         self.ip_b = self.zk_client.get("%s/Leader"%self.zk_root)
 
     def register(self, topics):
+
+        self.zk_client.create('%s/Subscriber/%s' % (self.zk_root, self.name),
+                              ('%s,%s' % (self.ip, '')).encode(),
+                              ephemeral=True, makepath=True)
+        for t in topics:
+            try:
+                c = self.zk_client.get_children("/Topic/%s/Sub"%t['topic'])
+            except NoNodeError:
+                self.zk_client.create("/Topic/%s/Sub"%t['topic'], makepath=True, ephemeral=False)
+                c = []
+            id = self.zk_client.create("/Topic/%s/Sub/Sub"%t['topic'], sequence=True, makepath=True, ephemeral=True)
+            history = t["history"]
+            s_h = ','.join([self.ip, history])
+            self.zk_client.set(id, s_h.encode())
+
+            self.logger.info('sub register to broker on %s. ip=%s, topic=%s' % (self.ip_b, self.ip, t['topic']))
         self.create_mw()
         self.sub_mid.register(topics)
-        for t in topics:
-            self.zk_client.create('%s/Subscriber/%s'%(self.zk_root, self.name), ('%s,%s'%(self.ip, t['topic'])).encode(),
-                              ephemeral=True, makepath=True)
-            self.logger.info('sub register to broker on %s. ip=%s, topic=%s' % (self.ip_b, self.ip, t['topic']))
         DataWatch(self.zk_client, "%s/Leader"%self.zk_root, self.update)
         return 0
 

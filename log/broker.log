@@ -1,10 +1,69 @@
-2019-03-07,16:15:40.983519 
-2019-03-07,16:15:40.987508 
-2019-03-07,16:15:40.990500 
-2019-03-07,16:15:40.994488 
-2019-03-07,16:15:41.022434 i am the current leader. Table={}
-2019-03-07,16:15:41.030396 Publisher changes. Table={}
-2019-03-07,16:15:41.042361 Subscriber changes. Table={}
-2019-03-07,16:15:41.042361 broker started. mode=2, port=5555, znode=/Election/Broker_0000000068
-2019-03-07,16:15:48.820282 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
-2019-03-07,16:15:48.828261 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '1', 'strength': '003'}, {'topic': 'hello1', 'history': '1', 'strength': '002'}]}, response=
+2019-03-07,16:40:29.061339 
+2019-03-07,16:40:29.067324 
+2019-03-07,16:40:29.071312 
+2019-03-07,16:40:29.075302 
+2019-03-07,16:40:29.118187 i am the current leader. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:40:29.143120 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:40:29.155088 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:40:29.155088 broker started. mode=2, port=5555, znode=/Election/Broker_0000000072
+2019-03-07,16:40:37.714198 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:41:07.688434 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:41:07.692422 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '1', 'strength': '010'}, {'topic': 'hello1', 'history': '1', 'strength': '009'}]}, response=
+2019-03-07,16:41:14.387523 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=[{'msg': 'success'}]
+2019-03-07,16:41:22.588586 request={'type': 'publish_req', 'topic': 'hello1', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=[], res=[]
+2019-03-07,16:42:16.005973 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006', 'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:42:16.006969 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5006', 'topic': [{'topic': 'hello', 'history': '1', 'strength': '011'}]}, response=
+2019-03-07,16:42:20.220699 Message blocked by ownship strength. Strongest=tcp://127.0.0.1:5005
+2019-03-07,16:42:20.221697 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=[], res=blocked by ownship strength
+2019-03-07,16:42:39.702825 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5006'}}
+2019-03-07,16:42:48.740651 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=[{'msg': 'success'}]
+2019-03-07,16:43:34.762506 request={'type': 'publish_req', 'topic': 'hello', 'value': '456', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=[{'msg': 'success'}]
+2019-03-07,16:44:05.708828 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5006'}}
+2019-03-07,16:44:09.694165 Publisher changes. Table={}
+2019-03-07,16:44:24.991487 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:44:24.993483 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '1', 'strength': '012'}, {'topic': 'hello1', 'history': '1', 'strength': '010'}]}, response=
+2019-03-07,16:44:30.985495 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006', 'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:44:30.987490 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5006', 'topic': [{'topic': 'hello', 'history': '5', 'strength': '013'}]}, response=
+2019-03-07,16:45:12.359931 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:5010', 'topic': [{'topic': 'hello', 'history': '3'}]}, response=
+2019-03-07,16:45:12.361914 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006', 'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:45:26.135109 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=['blocked by history requirement. require=3, actual=1']
+2019-03-07,16:45:37.975485 Message blocked by ownship strength. Strongest=tcp://127.0.0.1:5005
+2019-03-07,16:45:37.975485 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=[], res=blocked by ownship strength
+2019-03-07,16:46:13.714979 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:52:07.697358 Subscriber changes. Table={}
+2019-03-07,16:52:07.721293 Publisher changes. Table={}
+2019-03-07,16:52:08.044430 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:52:08.048419 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '3', 'strength': '014'}, {'topic': 'hello1', 'history': '1', 'strength': '011'}]}, response=
+2019-03-07,16:52:16.009138 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006', 'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:52:16.012133 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5006', 'topic': [{'topic': 'hello', 'history': '5', 'strength': '015'}]}, response=
+2019-03-07,16:52:39.442846 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:5010', 'topic': [{'topic': 'hello', 'history': '4'}]}, response=
+2019-03-07,16:52:39.502687 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006', 'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:53:00.252765 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=['blocked by history requirement. require=4, actual=3']
+2019-03-07,16:53:06.492058 Message blocked by ownship strength. Strongest=tcp://127.0.0.1:5005
+2019-03-07,16:53:06.492058 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=[], res=blocked by ownship strength
+2019-03-07,16:53:29.699093 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5006'}}
+2019-03-07,16:53:49.698606 Publisher changes. Table={'hello': {'pub': set(), 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5006'}}
+2019-03-07,16:54:24.527618 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:54:24.529613 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '3', 'strength': '016'}, {'topic': 'hello1', 'history': '1', 'strength': '012'}]}, response=
+2019-03-07,16:54:35.828405 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006', 'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:54:35.833393 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5006', 'topic': [{'topic': 'hello', 'history': '5', 'strength': '017'}]}, response=
+2019-03-07,16:54:41.665142 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=['blocked by history requirement. require=4, actual=3']
+2019-03-07,16:54:46.896228 Message blocked by ownship strength. Strongest=tcp://127.0.0.1:5005
+2019-03-07,16:54:46.897223 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=[], res=blocked by ownship strength
+2019-03-07,16:55:01.697002 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5006'}}
+2019-03-07,16:55:09.408385 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=[{'msg': 'success'}]
+2019-03-07,16:55:43.932215 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5006'}, 'sub': {'tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'}, 'strongest': 'tcp://127.0.0.1:5006'}}
+2019-03-07,16:55:43.934210 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:5011', 'topic': [{'topic': 'hello', 'history': '6'}]}, response=
+2019-03-07,16:55:52.865390 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5006'}, response=msg sent to ip=['tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'], res=[{'msg': 'success'}, 'blocked by history requirement. require=6, actual=5']
+2019-03-07,16:56:43.697538 Publisher changes. Table={'hello': {'pub': set(), 'sub': {'tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'}, 'strongest': 'tcp://127.0.0.1:5006'}}
+2019-03-07,16:57:02.551153 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '3', 'strength': '018'}, {'topic': 'hello1', 'history': '1', 'strength': '013'}]}, response=
+2019-03-07,16:57:02.553148 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:57:15.410006 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'], res=['blocked by history requirement. require=4, actual=3', 'blocked by history requirement. require=6, actual=3']
+2019-03-07,16:57:41.704622 Publisher changes. Table={'hello': {'pub': set(), 'sub': {'tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'}, 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-07,16:57:56.688541 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5007'}, 'sub': {'tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'}, 'strongest': 'tcp://127.0.0.1:5007'}}
+2019-03-07,16:57:56.689539 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5007', 'topic': [{'topic': 'hello', 'history': '7', 'strength': '019'}]}, response=
+2019-03-07,16:58:13.230359 request={'type': 'publish_req', 'topic': 'hello', 'value': '456', 'ip': 'tcp://127.0.0.1:5007'}, response=msg sent to ip=['tcp://127.0.0.1:5010', 'tcp://127.0.0.1:5011'], res=[{'msg': 'success'}, {'msg': 'success'}]
+2019-03-07,16:59:21.703489 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5007'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5007'}}
+2019-03-10,13:37:28.767544 Publisher changes. Table={}
+2019-03-10,13:37:28.774524 Subscriber changes. Table={}
+2019-03-10,13:37:28.821398 Publisher changes. Table={}

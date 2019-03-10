@@ -60,7 +60,7 @@ class Broker:
             for sub in subs:
                 data = self.zk.get('Topic/%s/Sub/%s'%(t, sub))[0].decode()
                 ip, history = data.split(',')
-                table.add_pub(ip, [{'topic': t, 'history': history}])
+                table.add_sub(ip, [{'topic': t, 'history': history}])
             pub_leader = self.zk.get('Topic/%s/Pub'%t)[0].decode()
             m_ip = pub_leader
             table.set_strengthest_pub(t, pub=m_ip)

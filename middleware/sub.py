@@ -70,22 +70,18 @@ class SubBroker:
         self.socket_sub = self.context_sub.socket(zmq.REQ)
         self.socket_sub.connect(self.ip_b)
 
-        for t in topics:
-            self.socket_sub.send_json(
-            json.dumps(
-                {"type": "add_subscriber", 
-                 "ip": self.ip, 
-                 "topic": t['topic'], 
-                 "strength": t['strength'], 
-                 "history": t['history']}
-                )
+        self.socket_sub.send_json(
+        json.dumps(
+            {"type": "add_subscriber",
+             "ip": self.ip,
+             "topic": topics}
             )
-            res = self.socket_sub.recv_json()
+        )
+        res = self.socket_sub.recv_json()
         
         self.context_ntf = zmq.Context()
         self.socket_ntf = self.context_ntf.socket(zmq.REP)
         self.socket_ntf.bind("tcp://*:%s" % self.ip.split(":")[2])
-        context2 = zmq.Context()
 
     def update_broker_ip(self, new_ip):
         self.context_sub = zmq.Context()
