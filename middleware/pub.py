@@ -71,7 +71,7 @@ class PublisherDirectly:
     publisher wants to exit the system
     '''
     def drop_system(self):
-        self.socket_broker.send_json((json.dumps({'type': 'pub_exit_system', 'ip': self.ip_address})))
+        # self.socket_broker.send_json((json.dumps({'type': 'pub_exit_system', 'ip': self.ip_address})))
         return 0
 
 
@@ -137,7 +137,7 @@ class PublisherViaBroker:
     publisher wants to exit the system
     '''
     def drop_system(self):
-        self.socket_broker.send_json((json.dumps({'type': 'pub_exit_system', 'ip': self.ip_address})))
+        # self.socket_broker.send_json((json.dumps({'type': 'pub_exit_system', 'ip': self.ip_address})))
         return 0
 
     '''

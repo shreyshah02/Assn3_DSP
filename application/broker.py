@@ -41,27 +41,27 @@ class Broker:
     def _sync_map_table(self):
         table = RegisterTable()
         try:
-            topics = self.zk.get_children('/Topic')
+            topics = self.zk.get_children('%s/Topic'%self.zk_root)
         except NoNodeError:
             topics = []
         for t in topics:
             try:
-                pubs = self.zk.get_children('/Topic/%s/Pub'%t)
+                pubs = self.zk.get_children('%s/Topic/%s/Pub'%(self.zk_root, t))
             except NoNodeError:
                 pubs = []
             try:
-                subs = self.zk.get_children('/Topic/%s/Sub'%t)
+                subs = self.zk.get_children('%s/Topic/%s/Sub'%(self.zk_root, t))
             except NoNodeError:
                 subs = []
             for pub in pubs:
-                data = self.zk.get('Topic/%s/Pub/%s'%(t, pub))[0].decode()
+                data = self.zk.get('%s/Topic/%s/Pub/%s'%(self.zk_root, t, pub))[0].decode()
                 ip, strength, history = data.split(',')
-                table.add_pub(ip, [{'topic': t, 'strength': strength, 'history': history}])
+                table.add_pub(ip, [{'topic': t, 'strength': strength, 'history': int(history)}])
             for sub in subs:
-                data = self.zk.get('Topic/%s/Sub/%s'%(t, sub))[0].decode()
+                data = self.zk.get('%s/Topic/%s/Sub/%s'%(self.zk_root, t, sub))[0].decode()
                 ip, history = data.split(',')
-                table.add_sub(ip, [{'topic': t, 'history': history}])
-            pub_leader = self.zk.get('Topic/%s/Pub'%t)[0].decode()
+                table.add_sub(ip, [{'topic': t, 'history': int(history)}])
+            pub_leader = self.zk.get('%s/Topic/%s/Pub'%(self.zk_root, t))[0].decode()
             m_ip = pub_leader
             table.set_strengthest_pub(t, pub=m_ip)
         self.broker.table = table
@@ -93,9 +93,9 @@ class Broker:
         self._create_znode()
         self.flag = True
         if int(self.config['mode']) == 1:
-            broker = BrokerType1(self.config, self.zk)
+            broker = BrokerType1(self.config, self.zk, self.zk_root)
         else:
-            broker = BrokerType2(self.config, self.zk)
+            broker = BrokerType2(self.config, self.zk, self.zk_root)
         self.broker = broker
         self._register_to_zk()
         pub_wather = ChildrenWatch(self.zk, '%s/Publisher'%self.zk_root, self._on_pub_change)

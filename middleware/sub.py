@@ -9,7 +9,7 @@ mutex = Lock()
 
 class SubDirect:
 
-    def __init__(self, ip_self, ip_broker, client):
+    def __init__(self, ip_self, ip_broker, client, zk_root=''):
         self.ip = ip_self
         self.ip_b = ip_broker
         self.context_sub = None
@@ -21,6 +21,7 @@ class SubDirect:
         self.msg_queue = []
         self.msg_threads = []
         self.receive_started = False
+        self.zk_root = zk_root
 
     def register(self, topics):
         self.context_sub = zmq.Context()
@@ -29,7 +30,7 @@ class SubDirect:
         
         for t in topics:
             self.topics_list.add(t['topic'])
-            DataWatch(self.zk_client, "/Topic/%s/Pub" % t['topic'], partial(self.ask_and_update, t))
+            DataWatch(self.zk_client, "%s/Topic/%s/Pub" % (self.zk_root, t['topic']), partial(self.ask_and_update, t))
             self.socket_sub.send_json(
                 json.dumps(
                     {"type": "add_subscriber",
@@ -71,6 +72,7 @@ class SubDirect:
         self.receive_started = True
 
     def ask_and_update(self, topic, data, stat, version):
+        time.sleep(0.5)
         self.socket_sub.send_json(
             json.dumps(
                 {"type": "add_subscriber",
@@ -109,11 +111,12 @@ class SubDirect:
         return self.msg_queue.pop(0)
 
     def unregister(self, topic):
-        self.socket_sub.send_json(json.dumps({"type": "sub_unregister_topic", "ip": self.ip, "topic": topic}))
+        # self.socket_sub.send_json(json.dumps({"type": "sub_unregister_topic", "ip": self.ip, "topic": topic}))
+        return 0
 
     def exit(self):
-        self.socket_sub.send_json(json.dumps({"type": "sub_exit_system", "ip": self.ip, "topic": "all"}))
-
+        # self.socket_sub.send_json(json.dumps({"type": "sub_exit_system", "ip": self.ip, "topic": "all"}))
+        return 0
 
 class SubBroker:
 
@@ -157,7 +160,9 @@ class SubBroker:
         return msg
 
     def unregister(self, topic):
-        self.socket_sub.send_json(json.dumps({"type": "sub_unregister_topic", "ip": self.ip, "topic": topic}))
+        # self.socket_sub.send_json(json.dumps({"type": "sub_unregister_topic", "ip": self.ip, "topic": topic}))
+        return 0
 
     def exit(self):
-        self.socket_sub.send_json(json.dumps({"type": "sub_exit_system", "ip": self.ip, "topic": "all"}))
+        # self.socket_sub.send_json(json.dumps({"type": "sub_exit_system", "ip": self.ip, "topic": "all"}))
+        return 0

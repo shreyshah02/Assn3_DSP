@@ -19,7 +19,6 @@ class Subscriber:
         self.exited = False
         self.logger = get_logger(logfile)
         self.zk_client = KazooClient(hosts=ip_zookeeper)
-        self.zk_client.start()
         self.sub_mid = None
 
     def create_middleware(self):
@@ -27,7 +26,7 @@ class Subscriber:
         ip_b = ip_b.decode()
         self.ip_b = ip_b
         if self.comm_type == sub_direct:
-            self.sub_mid = SubDirect(self.ip, self.ip_b, self.zk_client)
+            self.sub_mid = SubDirect(self.ip, self.ip_b, self.zk_client, zk_root=self.zk_root)
         elif self.comm_type == sub_broker:
             self.sub_mid = SubBroker(self.ip, self.ip_b)
         else:
@@ -42,7 +41,7 @@ class Subscriber:
         self.ip_b = self.zk_client.get("%s/Leader"%self.zk_root)
 
     def register(self, topics):
-
+        self.zk_client.start()
         try:
             self.zk_client.create('%s/Subscriber/%s' % (self.zk_root, self.name),
                                   ('%s,%s' % (self.ip, '')).encode(),
@@ -51,13 +50,13 @@ class Subscriber:
             pass
         for t in topics:
             try:
-                c = self.zk_client.get_children("/Topic/%s/Sub"%t['topic'])
+                c = self.zk_client.get_children("%s/Topic/%s/Sub"%(self.zk_root, t['topic']))
             except NoNodeError:
-                self.zk_client.create("/Topic/%s/Sub"%t['topic'], makepath=True, ephemeral=False)
+                self.zk_client.create("%s/Topic/%s/Sub"%(self.zk_root, t['topic']), makepath=True, ephemeral=False)
                 c = []
-            id = self.zk_client.create("/Topic/%s/Sub/Sub"%t['topic'], sequence=True, makepath=True, ephemeral=True)
+            id = self.zk_client.create("%s/Topic/%s/Sub/Sub"%(self.zk_root, t['topic']), sequence=True, makepath=True, ephemeral=True)
             history = t["history"]
-            s_h = ','.join([self.ip, history])
+            s_h = ','.join([self.ip, str(history)])
             self.zk_client.set(id, s_h.encode())
 
             self.logger.info('sub register to broker on %s. ip=%s, topic=%s' % (self.ip_b, self.ip, t['topic']))
@@ -68,13 +67,14 @@ class Subscriber:
         return 0
 
     def receive(self):
-        msg = ''
+        msg = None
         if self.comm_type == sub_direct:
             self.sub_mid.start_receive_threads()
             msg = self.sub_mid.receive()
         if self.comm_type == sub_broker:
             msg = self.sub_mid.notify()
-        self.logger.info('receive a msg=%s' % msg)
+        if msg:
+            self.logger.info('receive a msg=%s' % msg)
         return msg
 
     '''
@@ -88,6 +88,8 @@ class Subscriber:
     '''
     def exit(self):
         self.exited = True
+        self.zk_client.stop()
+        self.zk_client.close()
         self.sub_mid.exit()
         return 0
 

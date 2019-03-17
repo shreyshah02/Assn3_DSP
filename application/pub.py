@@ -14,7 +14,6 @@ class Publisher:
         self.zk_address = zk_address
         self.strength = strength
         self.my_client = kz_client.KazooClient(hosts=zk_address)
-        self.my_client.start()
         self.zk_root = zk_root
         self.broker_address = None
         self.pub_mw = None
@@ -41,43 +40,44 @@ class Publisher:
         return 0
 
     def watch_strength(self, topic, children):
-        c = self.my_client.get_children('/Topic/%s/Pub'%topic['topic'])
+        c = self.my_client.get_children('%s/Topic/%s/Pub'%(self.zk_root, topic['topic']))
         self.compare_strength(topic, c)
 
     def compare_strength(self, topic, c):
         min_s = 1000
         for x in c:
-            strength = int(self.my_client.get("/Topic/%s/Pub/%s"%(topic['topic'], x))[0].decode().split(',')[1])
+            strength = int(self.my_client.get("%s/Topic/%s/Pub/%s"%(self.zk_root, topic['topic'], x))[0].decode().split(',')[1])
             #print(type(strength))
             if strength < min_s:
                 min_s = strength
         if int(self.topic_strength[topic['topic']]) <= min_s:
-            self.my_client.set("/Topic/%s/Pub"%topic['topic'], self.ip_address.encode())
+            self.my_client.set("%s/Topic/%s/Pub"%(self.zk_root, topic['topic']), self.ip_address.encode())
         return 0
 
     def register(self, topics):
+        self.my_client.start()
         self.create_mw()
         self.broker_address = self.my_client.get("%s/Leader"%self.zk_root)[0].decode()
         topics_strength = []
         for topic in topics:
             try:
-                c = self.my_client.get_children("/Topic/%s/Pub"%topic['topic'])
+                c = self.my_client.get_children("%s/Topic/%s/Pub"%(self.zk_root, topic['topic']))
             except NoNodeError:
-                self.my_client.create("/Topic/%s/Pub"%topic['topic'], makepath=True, ephemeral=False)
+                self.my_client.create("%s/Topic/%s/Pub"%(self.zk_root, topic['topic']), makepath=True, ephemeral=False)
                 c = []
-            id = self.my_client.create("/Topic/%s/Pub/Pub"%topic['topic'], sequence=True, makepath=True, ephemeral=True)
+            id = self.my_client.create("%s/Topic/%s/Pub/Pub"%(self.zk_root, topic['topic']), sequence=True, makepath=True, ephemeral=True)
             #print (id)
             strength = id[-3:]
             #print (strength)
             history = topic["history"]
-            s_h = ','.join([self.ip_address, strength, history])
+            s_h = ','.join([self.ip_address, strength, str(history)])
             self.topic_strength[topic['topic']] = strength
             self.my_client.set(id, s_h.encode())
             self.compare_strength(topic, c)
             topic_s = copy.deepcopy(topic)
             topic_s["strength"] = strength
             topics_strength.append(topic_s)
-            cw = ChildrenWatch(self.my_client, '/Topic/%s/Pub' % topic['topic'], partial(self.watch_strength, topic))
+            cw = ChildrenWatch(self.my_client, '%s/Topic/%s/Pub' % (self.zk_root, topic['topic']), partial(self.watch_strength, topic))
             self.logger.info('pub register to broker on %s. ip=%s, topic=%s' % (self.broker_address, self.ip_address, topic_s))
         node_url = "%s/Publisher/" % self.zk_root + self.pub_name
         node_data = self.ip_address
@@ -113,6 +113,8 @@ class Publisher:
     '''
     def drop_system(self):
         self.exited = True
+        self.my_client.stop()
+        self.my_client.close()
         self.pub_mw.drop_system()
         return 0
 

@@ -58,7 +58,7 @@ class RegisterTable:
 
 class BrokerBase:
 
-    def __init__(self, config, zk):
+    def __init__(self, config, zk, zk_root=''):
         self.config = config
         self.table = RegisterTable()
         self.req_handler = {
@@ -68,6 +68,7 @@ class BrokerBase:
         self.socket = None
         self.logger = get_logger(config['logfile'])
         self.zk = zk
+        self.zk_root = zk_root
         self.watched_topics = {}
 
     def handle_req(self):
@@ -90,10 +91,10 @@ class BrokerBase:
         topics = req['topic'] if isinstance(req['topic'], list) else [req['topic']]
         for t in topics:
             t = t['topic']
-            if not self.zk.exists('/Topic/%s/Pub'%t):
-                self.zk.create('/Topic/%s/Pub' % t, makepath=True)
+            if not self.zk.exists('%s/Topic/%s/Pub'%(self.zk_root, t)):
+                self.zk.create('%s/Topic/%s/Pub' % (self.zk_root, t), makepath=True)
             if t not in self.watched_topics:
-                self.watched_topics[t] = DataWatch(self.zk, '/Topic/%s/Pub'%t, partial(self._on_strengtheset_change, t))
+                self.watched_topics[t] = DataWatch(self.zk, '%s/Topic/%s/Pub'%(self.zk_root, t), partial(self._on_strengtheset_change, t))
         return result
 
     def _add_sub(self, req):
@@ -102,8 +103,8 @@ class BrokerBase:
 
 class BrokerType1(BrokerBase):
 
-    def __init__(self, config, zk):
-        super().__init__(config, zk)
+    def __init__(self, config, zk, zk_root=''):
+        super().__init__(config, zk, zk_root)
         context = zmq.Context()
         socket = context.socket(zmq.REP)
         socket.bind("tcp://*:%s" % config['port'])
@@ -122,8 +123,8 @@ class BrokerType1(BrokerBase):
 
 class BrokerType2(BrokerBase):
 
-    def __init__(self, config, zk):
-        super().__init__(config, zk)
+    def __init__(self, config, zk, zk_root=''):
+        super().__init__(config, zk, zk_root)
         context = zmq.Context()
         socket = context.socket(zmq.REP)
         socket.bind("tcp://*:%s" % config['port'])
@@ -140,6 +141,11 @@ class BrokerType2(BrokerBase):
         for ip in self.table.topics[req['topic']]['sub']:
             sub_hisory = self.table.subs[ip]['topics'][req['topic']]['history']
             pub_hisory = self.table.pubs[req['ip']]['topics'][req['topic']]['history']
+            try:
+                pub_hisory < sub_hisory
+            except TypeError:
+                print(pub_hisory, sub_hisory)
+
             if pub_hisory < sub_hisory:
                 subs.append(ip)
                 res.append('blocked by history requirement. require=%s, actual=%s'%(sub_hisory, pub_hisory))
