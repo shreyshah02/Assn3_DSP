@@ -1,0 +1,13 @@
+2019-03-17,17:01:09.678499 
+2019-03-17,17:01:09.680555 
+2019-03-17,17:01:09.682550 
+2019-03-17,17:01:09.689499 
+2019-03-17,17:01:09.722397 i am the current leader. Table={}
+2019-03-17,17:01:09.726371 Publisher changes. Table={}
+2019-03-17,17:01:09.731358 Subscriber changes. Table={}
+2019-03-17,17:01:09.731358 broker started. mode=1, port=5555, znode=/Election/Broker_0000000094
+2019-03-17,17:01:11.722032 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5050', 'topic': [{'topic': 'hello0', 'history': 1, 'strength': '002'}]}, response=
+2019-03-17,17:01:11.749956 Publisher changes. Table={'hello0': {'pub': {'tcp://127.0.0.1:5050'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5050'}}
+2019-03-17,17:01:17.808750 Subscriber changes. Table={'hello0': {'pub': {'tcp://127.0.0.1:5050'}, 'sub': {'tcp://127.0.0.1:6000'}, 'strongest': 'tcp://127.0.0.1:5050'}}
+2019-03-17,17:01:18.307415 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6000', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:01:18.320382 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6000', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
