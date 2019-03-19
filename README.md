@@ -72,7 +72,7 @@ We conducted performance by varying number of subscribers for both two approache
 
 First, we did performance measurement test on mode1/approach1.
 
-![Alt text](./plots/1-1_mode1.PNG "")
+![Alt text](./plots/1_1_mode1.PNG "")
 
 From this plot, we can see the response time of 1000 messages varies from 0~5 microseconds. Except some messages whose response time reach to 5 ms, most data instance show similar response time. We then conduct ploting the std of response time, the std is quite small, showing the system has a good stability. 
 
@@ -84,7 +84,7 @@ We then conducted measurement on 1 publisher-10 subscriber's model. From this pl
 
 Then we did the same experiments on mode2/approach2.
 
-![Alt text](./plots/1-1_mode2.PNG "")
+![Alt text](./plots/1_1_mode2.PNG "")
 
 ![Alt text](./plots/std_mode2.PNG "")
 
