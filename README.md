@@ -23,19 +23,20 @@ In addition, we set up experiments on Chameleon cloud.
 
 ## How to run our code
 
-### 1 If you want to quickly verify the correctness of our program
+### 1 If you want to quickly verify the correctness of our program (suggested way to grade our assignment)
 
 You can run our unit test by the following steps,  
 1 Start zookeeper on 127.0.0.1:2181 (the unit test does not depend on mininet, so make sure it is running at localhost).  
-2 Execute "pytest test" in project home.
+2 Execute "pytest test" in project home directory.
 
 The unit test has covered the following content for both modes,  
 1 Starting up broker, publisher and subscriber.  
-2 Sending and receiving messages.  
-3 Reconnecting to new broker leader when the old dies.  
-
-This is a convenient and suggested way to grade our assignment.
-
+2 Sending and receiving messages in the following scenarios (both strength and history are binded to topic, although not emphasized in the following sentences):  
+ a) publishing messages from non-strongest publisher (no receiving)  
+ b) publishing messages from publisher with unsatisfying history (no receiving)  
+ c) original publisher dies, new publisher with satisfying history becomes the strongest and  messages (receiving)  
+ d) original publisher dies, new publisher with unsatisfying history becomes the strongest and  messages (not receiving)  
+ 
 ### 2 If you want to manually test our program using a singple topology in mininet
 
 Do as the following steps,  
@@ -45,7 +46,10 @@ Do as the following steps,
 4 In h2, execute "python3 start_broker.py config/test.ini Broker1" to start the broker.  
 5 In h3, execute "python3 start_pub.py config/test.ini Pub1" to start the publisher.  
 6 In h4, execute "python3 start_sub.py config/test.ini Sub1" to start the subscriber.  
-7 In h3, enter the message you want to publish, watch the subscriber in h4 receiving it.
+7 In h3, enter the message you want to publish, watch the subscriber in h4 receiving it.  
+Note that in step 7, you need to specify both topic and the message on that topic (in previous assignment, you just need to specify the message, because the topic is default)  
+![Alt text](./img/pub_msg.png "")
+
 
 ### 3 If you want to manually test our program using other topologies in mininet
 
@@ -53,7 +57,9 @@ In case you want to make further verification, you need to do some configuration
 1 Define your topology in mininet.  
 2 Modifiy the config/test.ini such that all the ip addresses are consistent with your topology.  
 3 Start up all the related entities (zookeeper, broker, publisher, subscriber) in proper windows. The commands are similar to what are described above, but make sure you are using the right name to start up broker, publisher and subscriber.  
-4 Enter the message you want to publish in publisher window(s), watch the subscriber(s) receiving it.
+4 Enter the message you want to publish in publisher window(s), watch the subscriber(s) receiving it.  
+Note that in this assignment, configurations of publisher and subscriber are changed a little bit because we will need to bind a history to every topic. You can see it from the following,  
+![Alt text](./img/config.png "")
 
 ## Performance measurement
 We collected the performance data and did some performance tests on the two approaches of pub/sub model we realized. Related code and data can be found in the 'performance data' file folder.
