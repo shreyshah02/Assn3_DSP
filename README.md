@@ -62,11 +62,11 @@ Note that in this assignment, configurations of publisher and subscriber are cha
 ![Alt text](./img/config.png "")
 
 ## Performance measurement
-We collected the performance data and did some performance tests on the two approaches of pub/sub model we realized. Related code and data can be found in the 'performance data' file folder.
+It is the same as what we did in previous assignments, that We collected the performance data and did some performance tests on the two approaches of pub/sub model we realized. Related code and data can be found in the 'performance data' file folder.
 
 For simply notation, let's call the approach which subscribers get address of publisher from broker and request message directly from the publisher mode1/approach1, and the approach which subscribers receive messages from broker mode2/approach2. 
 
-We measure performance according to the response time of intervals between a message being published by a publisher and reveived by a subscriber. For example, if a publisher publishs a message at time A, and this message is successfully received by a subscriber at time B, the intervals(B-A) is what we use to measure the preformance of pub/sub model. For each test, we generated 1000 messages and calculate the average response time and std response time.
+We measure performance according to the response time of intervals between a message being published by a publisher and received by a subscriber. For example, if a publisher publishs a message at time A, and this message is successfully received by a subscriber at time B, the intervals(B-A) is what we use to measure the preformance of pub/sub model. For each test, we generated 1000 messages and calculate the average response time and std response time.
 
 We conducted performance by varying number of subscribers for both two approaches to see if data amount or subscriber amount will effect the response time. 
 
