@@ -1,0 +1,32 @@
+2019-03-17,17:29:18.931247 
+2019-03-17,17:29:18.934232 
+2019-03-17,17:29:18.936226 
+2019-03-17,17:29:18.945201 
+2019-03-17,17:29:18.969138 i am the current leader. Table={}
+2019-03-17,17:29:18.971133 Publisher changes. Table={}
+2019-03-17,17:29:18.974125 Subscriber changes. Table={}
+2019-03-17,17:29:18.974125 broker started. mode=1, port=5555, znode=/Election/Broker_0000000110
+2019-03-17,17:29:20.975808 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5050', 'topic': [{'topic': 'hello0', 'history': 1, 'strength': '008'}]}, response=
+2019-03-17,17:29:20.981799 Publisher changes. Table={'hello0': {'pub': {'tcp://127.0.0.1:5050'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5050'}}
+2019-03-17,17:29:22.285305 Subscriber changes. Table={'hello0': {'pub': {'tcp://127.0.0.1:5050'}, 'sub': {'tcp://127.0.0.1:6005', 'tcp://127.0.0.1:6006', 'tcp://127.0.0.1:6000', 'tcp://127.0.0.1:6008', 'tcp://127.0.0.1:6004', 'tcp://127.0.0.1:6009', 'tcp://127.0.0.1:6007', 'tcp://127.0.0.1:6001', 'tcp://127.0.0.1:6003', 'tcp://127.0.0.1:6002'}, 'strongest': 'tcp://127.0.0.1:5050'}}
+2019-03-17,17:29:22.296275 Subscriber changes. Table={'hello0': {'pub': {'tcp://127.0.0.1:5050'}, 'sub': {'tcp://127.0.0.1:6005', 'tcp://127.0.0.1:6006', 'tcp://127.0.0.1:6000', 'tcp://127.0.0.1:6008', 'tcp://127.0.0.1:6004', 'tcp://127.0.0.1:6009', 'tcp://127.0.0.1:6007', 'tcp://127.0.0.1:6001', 'tcp://127.0.0.1:6003', 'tcp://127.0.0.1:6002'}, 'strongest': 'tcp://127.0.0.1:5050'}}
+2019-03-17,17:29:22.674300 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6000', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.686235 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6001', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.686235 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6000', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.700196 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6001', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.741085 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6006', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.754051 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6009', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.869740 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6004', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.900699 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6009', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:22.952525 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6003', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.011367 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6006', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.068209 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6002', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.202850 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6007', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.324527 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6008', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.430243 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6005', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.513019 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6004', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.614746 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6005', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.642731 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6003', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.750386 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6008', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.911952 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6002', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
+2019-03-17,17:29:23.980767 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:6007', 'topic': [{'topic': 'hello0', 'history': 1}]}, response=tcp://127.0.0.1:5050
