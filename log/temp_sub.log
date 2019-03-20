@@ -1,12 +1,12 @@
-2019-03-17,17:38:17.117862 sub register to broker on None. ip=tcp://127.0.0.1:5010, topic=hello
-2019-03-17,17:38:17.184684 sub register to broker on None. ip=tcp://127.0.0.1:5011, topic=hello
-2019-03-17,17:38:21.774404 receive a msg={'topic': 'hello', 'value': 'test2_pub2'}
-2019-03-17,17:38:22.301992 receive a msg={'topic': 'hello', 'value': 'test3_pub2'}
-2019-03-17,17:38:25.523375 receive a msg={'topic': 'hello', 'value': 'test5_pub3'}
-2019-03-17,17:38:25.539333 receive a msg={'topic': 'hello', 'value': 'test5_pub3'}
-2019-03-17,17:38:30.337496 sub register to broker on None. ip=tcp://127.0.0.1:6010, topic=hello
-2019-03-17,17:38:30.890018 sub register to broker on None. ip=tcp://127.0.0.1:6011, topic=hello
-2019-03-17,17:38:37.438526 receive a msg={'type': 'publish_req', 'topic': 'hello', 'value': 'test2_pub2', 'ip': 'tcp://127.0.0.1:6001'}
-2019-03-17,17:38:40.457424 receive a msg={'type': 'publish_req', 'topic': 'hello', 'value': 'test3_pub2', 'ip': 'tcp://127.0.0.1:6001'}
-2019-03-17,17:38:47.279209 receive a msg={'type': 'publish_req', 'topic': 'hello', 'value': 'test5_pub3', 'ip': 'tcp://127.0.0.1:6002'}
-2019-03-17,17:38:47.291180 receive a msg={'type': 'publish_req', 'topic': 'hello', 'value': 'test5_pub3', 'ip': 'tcp://127.0.0.1:6002'}
+2019-03-20,00:17:20.064197 sub register to broker on None. ip=tcp://127.0.0.1:5010, topic=hello
+2019-03-20,00:17:20.095150 sub register to broker on None. ip=tcp://127.0.0.1:5011, topic=hello
+2019-03-20,00:17:24.625198 receive a msg={'value': 'test2_pub2', 'topic': 'hello'}
+2019-03-20,00:17:25.129817 receive a msg={'value': 'test3_pub2', 'topic': 'hello'}
+2019-03-20,00:17:28.251309 receive a msg={'value': 'test5_pub3', 'topic': 'hello'}
+2019-03-20,00:17:28.252231 receive a msg={'value': 'test5_pub3', 'topic': 'hello'}
+2019-03-20,00:17:32.977881 sub register to broker on None. ip=tcp://127.0.0.1:6010, topic=hello
+2019-03-20,00:17:33.506936 sub register to broker on None. ip=tcp://127.0.0.1:6011, topic=hello
+2019-03-20,00:17:39.101224 receive a msg={'value': 'test2_pub2', 'topic': 'hello', 'type': 'publish_req', 'ip': 'tcp://127.0.0.1:6001'}
+2019-03-20,00:17:41.791195 receive a msg={'value': 'test3_pub2', 'topic': 'hello', 'type': 'publish_req', 'ip': 'tcp://127.0.0.1:6001'}
+2019-03-20,00:17:46.339221 receive a msg={'value': 'test5_pub3', 'topic': 'hello', 'type': 'publish_req', 'ip': 'tcp://127.0.0.1:6002'}
+2019-03-20,00:17:46.351196 receive a msg={'value': 'test5_pub3', 'topic': 'hello', 'type': 'publish_req', 'ip': 'tcp://127.0.0.1:6002'}

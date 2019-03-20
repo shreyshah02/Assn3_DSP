@@ -1,20 +1,20 @@
-2019-03-17,17:38:13.933381 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5000, topic={'topic': 'hello', 'history': 3, 'strength': '000'}
-2019-03-17,17:38:14.021146 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5001, topic={'topic': 'hello', 'history': 5, 'strength': '001'}
-2019-03-17,17:38:20.239510 publishing a msg. topic=hello, value=test1_pub1
-2019-03-17,17:38:20.241506 publishing a msg. topic=hello, value=test1_pub2
-2019-03-17,17:38:21.755454 publishing a msg. topic=hello, value=test2_pub2
-2019-03-17,17:38:22.291022 publishing a msg. topic=hello, value=test3_pub2
-2019-03-17,17:38:22.857507 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5000, topic={'topic': 'hello', 'history': 3, 'strength': '002'}
-2019-03-17,17:38:23.911745 publishing a msg. topic=hello, value=test4_pub1
-2019-03-17,17:38:24.456231 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5002, topic={'topic': 'hello', 'history': 7, 'strength': '003'}
-2019-03-17,17:38:25.510443 publishing a msg. topic=hello, value=test5_pub3
-2019-03-17,17:38:27.194905 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6000, topic={'topic': 'hello', 'history': 3, 'strength': '000'}
-2019-03-17,17:38:27.266710 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6001, topic={'topic': 'hello', 'history': 5, 'strength': '001'}
-2019-03-17,17:38:34.822536 publishing a msg. topic=hello, value=test1_pub1
-2019-03-17,17:38:34.851421 publishing a msg. topic=hello, value=test1_pub2
-2019-03-17,17:38:36.893992 publishing a msg. topic=hello, value=test2_pub2
-2019-03-17,17:38:40.416569 publishing a msg. topic=hello, value=test3_pub2
-2019-03-17,17:38:42.465053 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6000, topic={'topic': 'hello', 'history': 3, 'strength': '002'}
-2019-03-17,17:38:43.927141 publishing a msg. topic=hello, value=test4_pub1
-2019-03-17,17:38:45.827117 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6002, topic={'topic': 'hello', 'history': 7, 'strength': '003'}
-2019-03-17,17:38:47.216341 publishing a msg. topic=hello, value=test5_pub3
+2019-03-20,00:17:16.978566 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5000, topic={'strength': '000', 'topic': 'hello', 'history': 3}
+2019-03-20,00:17:17.018653 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5001, topic={'strength': '001', 'topic': 'hello', 'history': 5}
+2019-03-20,00:17:23.115983 publishing a msg. topic=hello, value=test1_pub1
+2019-03-20,00:17:23.116525 publishing a msg. topic=hello, value=test1_pub2
+2019-03-20,00:17:24.624297 publishing a msg. topic=hello, value=test2_pub2
+2019-03-20,00:17:25.129099 publishing a msg. topic=hello, value=test3_pub2
+2019-03-20,00:17:25.685046 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5000, topic={'strength': '002', 'topic': 'hello', 'history': 3}
+2019-03-20,00:17:26.697903 publishing a msg. topic=hello, value=test4_pub1
+2019-03-20,00:17:27.236499 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5002, topic={'strength': '003', 'topic': 'hello', 'history': 7}
+2019-03-20,00:17:28.250363 publishing a msg. topic=hello, value=test5_pub3
+2019-03-20,00:17:29.847012 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6000, topic={'strength': '000', 'topic': 'hello', 'history': 3}
+2019-03-20,00:17:29.939173 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6001, topic={'strength': '001', 'topic': 'hello', 'history': 5}
+2019-03-20,00:17:37.075831 publishing a msg. topic=hello, value=test1_pub1
+2019-03-20,00:17:37.076098 publishing a msg. topic=hello, value=test1_pub2
+2019-03-20,00:17:38.666341 publishing a msg. topic=hello, value=test2_pub2
+2019-03-20,00:17:41.760245 publishing a msg. topic=hello, value=test3_pub2
+2019-03-20,00:17:42.918779 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6000, topic={'strength': '002', 'topic': 'hello', 'history': 3}
+2019-03-20,00:17:44.060223 publishing a msg. topic=hello, value=test4_pub1
+2019-03-20,00:17:45.102522 pub register to broker on tcp://127.0.0.1:6555. ip=tcp://127.0.0.1:6002, topic={'strength': '003', 'topic': 'hello', 'history': 7}
+2019-03-20,00:17:46.300230 publishing a msg. topic=hello, value=test5_pub3
