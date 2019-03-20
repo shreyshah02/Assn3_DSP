@@ -1,3 +1,0 @@
-2019-03-19,19:56:37.831225 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5005, topic={'topic': 'hello', 'history': 5, 'strength': '012'}
-2019-03-19,19:56:37.845181 pub register to broker on tcp://127.0.0.1:5555. ip=tcp://127.0.0.1:5005, topic={'topic': 'hello1', 'history': 1, 'strength': '012'}
-2019-03-19,19:56:52.366344 publishing a msg. topic=hello, value=123
