@@ -24,7 +24,7 @@ topics = []
 topics_info = config['topic'] if isinstance(config['topic'], list) else [config['topic']]
 for item in topics_info:
     t, h = item.split('|')
-    topics.append({'topic':t, 'history': h})
+    topics.append({'topic':t, 'history': int(h)})
 
 p.register(topics)
 

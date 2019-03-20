@@ -1,14 +1,13 @@
-2019-03-17,11:44:41.872603 
-2019-03-17,11:44:41.876591 
-2019-03-17,11:44:41.880579 
-2019-03-17,11:44:41.884569 
-2019-03-17,11:44:41.914489 i am the current leader. Table={}
-2019-03-17,11:44:41.924463 Publisher changes. Table={}
-2019-03-17,11:44:41.931447 Subscriber changes. Table={}
-2019-03-17,11:44:41.931447 broker started. mode=2, port=5555, znode=/Election/Broker_0000000091
-2019-03-17,11:44:46.535128 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
-2019-03-17,11:44:46.546098 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': '5', 'strength': '059'}, {'topic': 'hello1', 'history': '1', 'strength': '035'}]}, response=
-2019-03-17,11:44:48.772144 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
-2019-03-17,11:44:48.774139 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:5010', 'topic': [{'topic': 'hello', 'history': '4'}]}, response=
-2019-03-17,11:44:51.501842 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=[{'msg': 'success'}]
-2019-03-17,11:45:00.302299 request={'type': 'publish_req', 'topic': 'hello', 'value': '345', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=[{'msg': 'success'}]
+2019-03-19,19:56:35.927315 
+2019-03-19,19:56:35.935291 
+2019-03-19,19:56:35.941275 
+2019-03-19,19:56:35.947259 
+2019-03-19,19:56:36.001124 i am the current leader. Table={}
+2019-03-19,19:56:36.018068 Publisher changes. Table={}
+2019-03-19,19:56:36.031032 Subscriber changes. Table={}
+2019-03-19,19:56:36.032029 broker started. mode=2, port=5555, znode=/Election/Broker_0000000122
+2019-03-19,19:56:37.892055 Publisher changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-19,19:56:47.068511 request={'type': 'add_publisher', 'ip': 'tcp://127.0.0.1:5005', 'topic': [{'topic': 'hello', 'history': 5, 'strength': '012'}, {'topic': 'hello1', 'history': 1, 'strength': '012'}]}, response=
+2019-03-19,19:56:51.025927 request={'type': 'add_subscriber', 'ip': 'tcp://127.0.0.1:5010', 'topic': [{'topic': 'hello', 'history': 4}]}, response=
+2019-03-19,19:56:51.037894 Subscriber changes. Table={'hello': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': {'tcp://127.0.0.1:5010'}, 'strongest': 'tcp://127.0.0.1:5005'}, 'hello1': {'pub': {'tcp://127.0.0.1:5005'}, 'sub': set(), 'strongest': 'tcp://127.0.0.1:5005'}}
+2019-03-19,19:56:52.383296 request={'type': 'publish_req', 'topic': 'hello', 'value': '123', 'ip': 'tcp://127.0.0.1:5005'}, response=msg sent to ip=['tcp://127.0.0.1:5010'], res=[{'msg': 'success'}]

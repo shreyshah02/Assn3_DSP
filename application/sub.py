@@ -48,6 +48,9 @@ class Subscriber:
                                   ephemeral=True, makepath=True)
         except NodeExistsError:
             pass
+
+        self.create_middleware()
+
         for t in topics:
             try:
                 c = self.zk_client.get_children("%s/Topic/%s/Sub"%(self.zk_root, t['topic']))
@@ -61,7 +64,6 @@ class Subscriber:
 
             self.logger.info('sub register to broker on %s. ip=%s, topic=%s' % (self.ip_b, self.ip, t['topic']))
 
-        self.create_middleware()
         self.sub_mid.register(topics)
         DataWatch(self.zk_client, "%s/Leader"%self.zk_root, self.update)
         return 0
